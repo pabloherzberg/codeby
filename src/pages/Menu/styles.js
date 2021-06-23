@@ -53,28 +53,44 @@ export const Container = styled.div`
             font-size: 0.7em;
           }
           p:nth-child(3) {
-            font-size: 0.8em;
-          }
-        }
-        #minus {
-          display: flex;
-          align-items: center;
-
-          span {
-            font-size: 0.6em;
-            background: #ffcdaa;
+            height: 2em;
+            font-size: 0.7em;
             display: flex;
-            border-radius: 4px;
-            height: 50%;
             align-items: center;
-            justify-content: center;
-            padding-right: 4px;
-          }
-          img {
-            object-fit: contain;
-            height: 50%;
-            width: 40px;
-            border: none;
+            justify-content: space-between;
+            span {
+              height: 100%;
+              display: flex;
+              align-items: center;
+              img {
+                height: 30px;
+                width: 30px;
+                border: none;
+                object-fit: contain;
+              }
+            }
+            .tot {
+              font-weight: 600;
+              display: flex;
+              justify-content: flex-end;
+              padding-right: 0.2em;
+            }
+            #minus {
+              background: #ffcddd;
+              border-radius: 4px;
+              padding-right: 4px;
+              img {
+                height: 80%;
+              }
+            }
+            #add {
+              background: #add;
+              border-radius: 4px;
+              padding-right: 4px;
+              img {
+                height: 80%;
+              }
+            }
           }
         }
       }
@@ -114,7 +130,8 @@ export const Container = styled.div`
     }
     button {
       margin: 3vh 0 3vh 0;
-      background: #3b74f2;
+      background: ${({ selectedCandies }) =>
+        selectedCandies > 0 ? '#3b74f2' : 'gray'};
       cursor: ${({ selectedCandies }) =>
         selectedCandies > 0 ? 'pointer' : ''};
       color: white;

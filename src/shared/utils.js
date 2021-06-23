@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export const formatPrice = (price) => {
   const arrayString = price.toString().split('');
   if (arrayString.length < 3) {
@@ -18,10 +19,26 @@ export const formatPrice = (price) => {
   return 0;
 };
 
-export const contactDeveloper = () => {
-  const msg = `Opa, e aí Pablo, tudo bueno? Testei tua aplicação até o final!`;
+export const contactD = (items) => {
+  const auxArray = Object.values(items).map((candy) =>
+    Number.parseFloat(candy.price),
+  );
 
-  const number = 5553981053550;
+  const t = auxArray.reduce((tot, current) => tot + current);
 
-  window.open(`https://wa.me/${number}?text=${msg}`);
+  const msg = `Olá! Gostaria de fazer uma encomenda no valor de R$${t.toFixed(
+    2,
+  )}.%0aCom as seguintes quantidades:%0a`;
+
+  let itemList = [];
+  Object.values(items).map((item) =>
+    itemList.push(`x${item.count} ${item.name}`),
+  );
+  itemList = itemList.splice(',').join('%0a');
+
+  const formatedMsg = msg + itemList;
+
+  const number = 557191159027;
+
+  window.open(`https://wa.me/${number}?text=${formatedMsg}`);
 };
