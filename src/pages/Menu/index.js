@@ -56,15 +56,13 @@ function Menu() {
     }
   }, [selectedCandies]);
 
-  console.log(candies);
-
   return (
     <Container total={total} selectedCandies={selectedCandies.length}>
       <header>Cardápio</header>
       <main>
         <ul>
           {Object.values(candies).map((candy) => (
-            <li>
+            <li key={candy.key}>
               <img
                 loading="lazy"
                 src={candy.urlImage}

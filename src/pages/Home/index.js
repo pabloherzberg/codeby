@@ -32,7 +32,6 @@ function Home() {
         if (snap) {
           const filtered = Object.values(snap).filter((o) => o.status);
           setOptions(Object.values(filtered));
-          console.log(filtered);
         }
       });
   }, []);
@@ -48,6 +47,7 @@ function Home() {
           {options &&
             options.map((option) => (
               <li
+                key={option.key}
                 onClick={() => {
                   setCandies(option.flavors);
                   history.push('/cardapio');

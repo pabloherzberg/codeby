@@ -20,6 +20,7 @@ function Cart() {
   const { selectedCandies, setSelectedCandies } = useContext(CartContext);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     if (selectedCandies.length > 0) {
@@ -55,6 +56,9 @@ function Cart() {
     if (index !== -1) {
       listTemp.splice(index, 1);
     }
+    if (listTemp.length === 0) {
+      history.push('/');
+    }
 
     setSelectedCandies([...listTemp]);
   }
@@ -66,7 +70,7 @@ function Cart() {
         <ul>
           {items &&
             Object.values(items).map((candy) => (
-              <li>
+              <li key={candy.key}>
                 <img
                   loading="lazy"
                   src={candy.urlImage}
