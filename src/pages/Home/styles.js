@@ -5,17 +5,18 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-image: linear-gradient(-45deg, pink, white);
+  background-image: var(--backgroundgradient);
   header {
-    height: 8vh;
+    height: 12vh;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     border-bottom: solid var(--gray) 1px;
     h1 {
       text-align: center;
       font-weight: bold;
       font-size: 1.2em;
+      padding-left: 20px;
     }
     img {
       height: 80%;
@@ -23,18 +24,23 @@ export const Container = styled.div`
     }
   }
   main {
+    width: 100%;
     display: flex;
-    height: 92vh;
+    height: 88vh;
     border-bottom: solid var(--gray) 1px;
     ul {
       height: 100%;
       width: 100%;
+      margin-left: auto;
+      margin-right: auto;
       list-style: none;
       overflow-y: scroll;
       display: flex;
       flex-direction: column;
+      align-items: center;
       padding-top: 40px;
       li {
+        max-width: 800px;
         border: solid var(--gray) 1px;
         border-radius: 2px;
         box-shadow: 2px 2px 4px var(--gray);
@@ -45,16 +51,17 @@ export const Container = styled.div`
         display: flex;
         cursor: pointer;
         transition: 200ms;
-        background: white;
+        background: linear-gradient(45deg, white, white, white, #9dff98);
         &:hover {
-          background: var(--gray);
+          background: linear-gradient(45deg, white, #9dff98);
           transform: scale(1.05);
         }
         img {
-          border: solid var(--gray) 1px;
           height: 10vh;
           width: 10vh;
           object-fit: contain;
+          box-sizing: content-box !important;
+          padding-left: 10px;
         }
         .description {
           display: flex;

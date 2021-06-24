@@ -40,7 +40,7 @@ function Home() {
     <Container>
       <header>
         <img src={bpm} alt="logo" />
-        <h1>Brigadeiro pelo Mundo</h1>
+        <h1>Brigadeiro Pelo Mundo</h1>
       </header>
       <main>
         <ul>
