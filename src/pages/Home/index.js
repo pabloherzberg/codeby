@@ -14,11 +14,13 @@ import { CartContext } from '../../context/Candies';
 import firebase from '../../shared/firebase';
 
 import bpm from '../../assets/logo.png';
+import cart from '../../assets/cart.svg';
 
 function Home() {
   // eslint-disable-next-line no-unused-vars
-  const { setCandies } = useContext(CartContext);
+  const { setCandies, selectedCandies } = useContext(CartContext);
   const [options, setOptions] = useState(false);
+  const [itemsCount, setItemsCount] = useState(0);
 
   const history = useHistory();
 
@@ -36,11 +38,31 @@ function Home() {
       });
   }, []);
 
+  useEffect(() => {
+    const map = new Map();
+
+    selectedCandies.forEach((el) => {
+      if (map.has(el.key)) {
+        map.get(el.key).count += 1;
+      } else {
+        map.set(el.key, Object.assign(el, { count: 1 }));
+      }
+    });
+
+    setItemsCount(Object.values(Object.fromEntries(map)).length);
+  }, [selectedCandies]);
+
   return (
     <Container>
       <header>
         <img src={bpm} alt="logo" />
         <h1>Brigadeiro Pelo Mundo</h1>
+        {itemsCount > 0 && (
+          <div id="cart" onClick={() => history.push('/carrinho')}>
+            <img src={cart} alt="carrinho" />
+            <span>{itemsCount}</span>
+          </div>
+        )}
       </header>
       <main>
         <ul>

@@ -22,6 +22,33 @@ export const Container = styled.div`
       height: 80%;
       object-fit: contain;
     }
+    #cart {
+      width: 8vh;
+      height: 8vh;
+      border-radius: 50%;
+      border: solid red 1px;
+      position: relative;
+      img {
+        object-fit: contain;
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      span {
+        position: absolute;
+        bottom: -20%;
+        left: 0%;
+        background: red;
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        color: white;
+        transform: translate(-50%, -50%);
+      }
+    }
   }
   main {
     width: 100%;
