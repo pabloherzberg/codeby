@@ -92,6 +92,11 @@ export const Container = styled.div`
               }
             }
           }
+          p:nth-child(4) {
+            color: var(--gray);
+            font-weight: 700;
+            font-size: 0.7em;
+          }
         }
       }
     }

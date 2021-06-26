@@ -26,7 +26,7 @@ export const Container = styled.div`
       width: 8vh;
       height: 8vh;
       border-radius: 50%;
-      border: solid red 1px;
+      border: solid black 1px;
       position: relative;
       img {
         object-fit: contain;
@@ -40,7 +40,7 @@ export const Container = styled.div`
         position: absolute;
         bottom: -20%;
         left: 0%;
-        background: red;
+        background: var(--pinkYasmin);
         border-radius: 50%;
         width: 26px;
         height: 26px;

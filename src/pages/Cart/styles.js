@@ -42,7 +42,6 @@ export const Container = styled.div`
           width: 75vw;
           height: 25vw;
           margin-left: 2vw;
-
           p:nth-child(1) {
             font-weight: 700;
             font-size: 0.7em;
@@ -55,7 +54,13 @@ export const Container = styled.div`
           p:nth-child(3) {
             font-size: 0.8em;
           }
+          p:nth-child(4) {
+            color: var(--gray);
+            font-weight: 700;
+            font-size: 0.7em;
+          }
         }
+
         #minus {
           display: flex;
           align-items: center;
@@ -75,6 +80,16 @@ export const Container = styled.div`
             height: 50%;
             width: 40px;
             border: none;
+          }
+        }
+      }
+      .insuficient {
+        background: var(--backgroundgradient);
+        .description {
+          p:nth-child(4) {
+            color: red !important;
+            font-weight: 700;
+            font-size: 0.7em;
           }
         }
       }

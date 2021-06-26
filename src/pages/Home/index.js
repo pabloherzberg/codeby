@@ -18,7 +18,7 @@ import cart from '../../assets/cart.svg';
 
 function Home() {
   // eslint-disable-next-line no-unused-vars
-  const { setCandies, selectedCandies } = useContext(CartContext);
+  const { setCandies, selectedCandies, setMinCount } = useContext(CartContext);
   const [options, setOptions] = useState(false);
   const [itemsCount, setItemsCount] = useState(0);
 
@@ -72,6 +72,7 @@ function Home() {
                 key={option.key}
                 onClick={() => {
                   setCandies(option.flavors);
+                  setMinCount(option.count);
                   history.push('/cardapio');
                 }}
               >

@@ -10,16 +10,21 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Container } from './styles';
-import { formatPrice, contactD } from '../../shared/utils';
+import { contactD } from '../../shared/utils';
 import { CartContext } from '../../context/Candies';
 
 import minus from '../../assets/minus.svg';
 
+import Modal from '../../Components/Modal';
+
 function Cart() {
   // eslint-disable-next-line no-unused-vars
-  const { selectedCandies, setSelectedCandies } = useContext(CartContext);
+  const { selectedCandies, setSelectedCandies, minCount } = useContext(
+    CartContext,
+  );
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
+  const [modal, setModal] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -63,14 +68,51 @@ function Cart() {
     setSelectedCandies([...listTemp]);
   }
 
+  function checkCount() {
+    const map = new Map();
+
+    selectedCandies.forEach((el) => {
+      if (map.has(el.key)) {
+        map.get(el.key).count += 1;
+      } else {
+        map.set(el.key, Object.assign(el, { count: 1 }));
+      }
+    });
+
+    const items = Object.fromEntries(map);
+
+    const list = Object.values(items);
+
+    if (
+      list.some((el) => el.count < el.minCount) ||
+      selectedCandies.length === 0
+    ) {
+      setModal(true);
+    } else {
+      contactD(items);
+    }
+  }
+
   return (
     <Container total={total} selectedCandies={selectedCandies.length}>
+      {modal && (
+        <Modal
+          minCount={minCount}
+          close={() => setModal(false)}
+          text="Um dos itens do carrinho não possui quatidade suficiente, insira a quantidade mínima."
+        />
+      )}
       <header>Meu carrinho</header>
       <main>
         <ul>
           {items &&
             Object.values(items).map((candy) => (
-              <li key={candy.key}>
+              <li
+                className={
+                  candy.count < candy.minCount ? 'insuficient' : undefined
+                }
+                key={candy.key}
+              >
                 <img
                   loading="lazy"
                   src={candy.urlImage}
@@ -80,6 +122,12 @@ function Cart() {
                   <p>{candy.name}</p>
                   <p>R$ {Number.parseFloat(candy.price).toFixed(2)}</p>
                   <p>x {candy.count}</p>
+                  <p>
+                    Quantidade mínima:
+                    {candy.minCount > 1
+                      ? ` ${candy.minCount} unidades`
+                      : ` ${candy.minCount} unidade`}
+                  </p>
                 </div>
                 <div id="minus">
                   <span onClick={() => handleRemove(candy)}>
@@ -101,7 +149,7 @@ function Cart() {
             <p className="discount">Parabéns, sua compra tem frete grátis</p>
           )}
         </div>
-        <button onClick={() => contactD(items)}>Finalizar compra</button>
+        <button onClick={() => checkCount()}>Finalizar compra</button>
       </footer>
     </Container>
   );
