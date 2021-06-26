@@ -82,6 +82,27 @@ export const Container = styled.div`
             border: none;
           }
         }
+        #add {
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
+          span {
+            font-size: 0.6em;
+            background: #add;
+            display: flex;
+            border-radius: 4px;
+            height: 50%;
+            align-items: center;
+            justify-content: center;
+            padding-right: 4px;
+          }
+          img {
+            object-fit: contain;
+            height: 50%;
+            width: 40px;
+            border: none;
+          }
+        }
       }
       .insuficient {
         background: var(--backgroundgradient);

@@ -14,6 +14,7 @@ import { contactD } from '../../shared/utils';
 import { CartContext } from '../../context/Candies';
 
 import minus from '../../assets/minus.svg';
+import add from '../../assets/plus.svg';
 
 import Modal from '../../Components/Modal';
 
@@ -52,6 +53,15 @@ function Cart() {
       setTotal(0);
     }
   }, [selectedCandies]);
+
+  function handleAdd(e) {
+    /*  const arrayAux = [];
+    for (let i = 0; i < minCount; i += 1) {
+      arrayAux.push(e);
+    }
+    setSelectedCandies([...selectedCandies, ...arrayAux]); */
+    setSelectedCandies([...selectedCandies, { ...e, minCount }]);
+  }
 
   function handleRemove(candy) {
     const find = selectedCandies.find((o) => o.key === candy.key);
@@ -133,6 +143,12 @@ function Cart() {
                   <span onClick={() => handleRemove(candy)}>
                     <img src={minus} alt="remover" />
                     Remover
+                  </span>
+                </div>
+                <div id="add">
+                  <span onClick={() => handleAdd(candy)}>
+                    <img src={add} alt="add" />
+                    adicionar
                   </span>
                 </div>
               </li>
