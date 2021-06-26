@@ -52,7 +52,34 @@ export const Container = styled.div`
             font-size: 0.7em;
           }
           p:nth-child(3) {
-            font-size: 0.8em;
+            height: 2em;
+            font-size: 0.7em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            div {
+              display: flex;
+              background: transparent !important;
+              div {
+                font-size: 1.8em;
+                #minus {
+                  background: #ffcddd;
+                  border-radius: 4px;
+                  padding-right: 4px;
+                  img {
+                    height: 80%;
+                  }
+                }
+                #add {
+                  background: #add;
+                  border-radius: 4px;
+                  padding-right: 4px;
+                  img {
+                    height: 80%;
+                  }
+                }
+              }
+            }
           }
           p:nth-child(4) {
             color: var(--gray);

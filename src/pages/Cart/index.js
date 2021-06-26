@@ -131,25 +131,29 @@ function Cart() {
                 <div className="description">
                   <p>{candy.name}</p>
                   <p>R$ {Number.parseFloat(candy.price).toFixed(2)}</p>
-                  <p>x {candy.count}</p>
+                  <p>
+                    x {candy.count}
+                    <div>
+                      <div onClick={() => handleRemove(candy)} id="minus">
+                        <span>
+                          <img src={minus} alt="remover" />
+                          Remover
+                        </span>
+                      </div>
+                      <div onClick={() => handleAdd(candy)} id="add">
+                        <span>
+                          <img src={add} alt="add" />
+                          adicionar
+                        </span>
+                      </div>
+                    </div>
+                  </p>
                   <p>
                     Quantidade mínima:
                     {candy.minCount > 1
                       ? ` ${candy.minCount} unidades`
                       : ` ${candy.minCount} unidade`}
                   </p>
-                </div>
-                <div id="minus">
-                  <span onClick={() => handleRemove(candy)}>
-                    <img src={minus} alt="remover" />
-                    Remover
-                  </span>
-                </div>
-                <div id="add">
-                  <span onClick={() => handleAdd(candy)}>
-                    <img src={add} alt="add" />
-                    adicionar
-                  </span>
                 </div>
               </li>
             ))}
