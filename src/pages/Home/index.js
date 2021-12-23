@@ -9,105 +9,85 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { Container } from './styles';
-import { formatPrice } from '../../shared/utils';
 import { CartContext } from '../../context/Candies';
 
-import candies from '../../Database/candies.json';
+import firebase from '../../shared/firebase';
 
-import add from '../../assets/plus.svg';
-import minus from '../../assets/minus.svg';
+import bpm from '../../assets/logo.png';
+import cart from '../../assets/cart.svg';
 
 function Home() {
   // eslint-disable-next-line no-unused-vars
-  const { selectedCandies, setSelectedCandies } = useContext(CartContext);
-  const [total, setTotal] = useState(0);
+  const { setCandies, selectedCandies, setMinCount } = useContext(CartContext);
+  const [options, setOptions] = useState(false);
+  const [itemsCount, setItemsCount] = useState(0);
 
   const history = useHistory();
 
-  function handleAdd(e) {
-    setSelectedCandies([...selectedCandies, e]);
-  }
-
-  function handleRemove(candy) {
-    const find = selectedCandies.find((o) => o.id === candy.id);
-    const listTemp = selectedCandies;
-    const index = listTemp.indexOf(find);
-
-    if (index !== -1) {
-      listTemp.splice(index, 1);
-    }
-
-    setSelectedCandies([...listTemp]);
-  }
+  useEffect(() => {
+    firebase
+      .database()
+      .ref('pastas')
+      .once('value')
+      .then((snapshot) => {
+        const snap = snapshot.val();
+        if (snap) {
+          const filtered = Object.values(snap).filter((o) => o.status);
+          setOptions(Object.values(filtered));
+        }
+      });
+  }, []);
 
   useEffect(() => {
-    if (selectedCandies.length > 0) {
-      const auxArray = Object.values(selectedCandies).map(
-        (candy) => candy.sellingPrice,
-      );
+    const map = new Map();
 
-      const t = auxArray.reduce((tot, current) => tot + current);
+    selectedCandies.forEach((el) => {
+      if (map.has(el.key)) {
+        map.get(el.key).count += 1;
+      } else {
+        map.set(el.key, Object.assign(el, { count: 1 }));
+      }
+    });
 
-      setTotal(t);
-    } else {
-      setTotal(0);
-    }
+    setItemsCount(Object.values(Object.fromEntries(map)).length);
   }, [selectedCandies]);
 
   return (
-    <Container total={total} selectedCandies={selectedCandies.length}>
-      <header>Cardápio</header>
+    <Container>
+      <header>
+        <img src={bpm} alt="logo" />
+        <h1>Brigadeiro Pelo Mundo</h1>
+        {itemsCount > 0 && (
+          <div id="cart" onClick={() => history.push('/carrinho')}>
+            <img src={cart} alt="carrinho" />
+            <span>{itemsCount}</span>
+          </div>
+        )}
+      </header>
       <main>
         <ul>
-          {candies.items.map((candy) => (
-            <li>
-              <img
-                loading="lazy"
-                src={candy.imageUrl}
-                alt="Imagem representativa de um doce"
-              />
-              <div className="description">
-                <p>{candy.name}</p>
-                <p>{formatPrice(candy.price)}</p>
-                <p>{formatPrice(candy.sellingPrice)}</p>
-                <p>
-                  <span className="tot">
-                    {selectedCandies.filter((o) => o.id === candy.id).length}
-                  </span>
-                  <span onClick={() => handleRemove(candy)}>
-                    <img src={minus} alt="remover" />
-                    Remover
-                  </span>
-                  <span onClick={() => handleAdd(candy)}>
-                    <img src={add} alt="adicionar" />
-                    Adicionar
-                  </span>
-                </p>
-              </div>
-            </li>
-          ))}
+          {options &&
+            options.map((option) => (
+              <li
+                key={option.key}
+                onClick={() => {
+                  setCandies(option.flavors);
+                  setMinCount(option.count);
+                  history.push('/cardapio');
+                }}
+              >
+                <img
+                  loading="lazy"
+                  src={option.urlImage}
+                  alt="Imagem representativa de um doce"
+                />
+                <div className="description">
+                  <p>{option.name}</p>
+                </div>
+              </li>
+            ))}
         </ul>
       </main>
-      <footer>
-        <div>
-          <p className="total">
-            <span>Total</span>
-            <span>{formatPrice(total)}</span>
-          </p>
-          {total > 1000 && (
-            <p className="discount">Parabéns, sua compra tem frete grátis</p>
-          )}
-        </div>
-        <button
-          onClick={
-            selectedCandies.length > 0
-              ? () => history.push('/carrinho')
-              : () => {}
-          }
-        >
-          Ir para o carrinho
-        </button>
-      </footer>
     </Container>
   );
 }

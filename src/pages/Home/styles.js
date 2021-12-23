@@ -5,133 +5,100 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-image: var(--backgroundgradient);
   header {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2em;
-    height: 8vh;
+    height: 12vh;
     display: flex;
     align-items: center;
     justify-content: center;
     border-bottom: solid var(--gray) 1px;
+    h1 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      padding-left: 20px;
+    }
+    img {
+      height: 80%;
+      object-fit: contain;
+    }
+    #cart {
+      width: 8vh;
+      height: 8vh;
+      border-radius: 50%;
+      border: solid black 1px;
+      position: relative;
+      img {
+        object-fit: contain;
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      span {
+        position: absolute;
+        bottom: -20%;
+        left: 0%;
+        background: var(--pinkYasmin);
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        color: white;
+        transform: translate(-50%, -50%);
+      }
+    }
   }
   main {
+    width: 100%;
     display: flex;
-    height: 67vh;
+    height: 88vh;
     border-bottom: solid var(--gray) 1px;
     ul {
       height: 100%;
       width: 100%;
+      margin-left: auto;
+      margin-right: auto;
       list-style: none;
       overflow-y: scroll;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
       li {
-        height: 25vw;
+        max-width: 800px;
+        border: solid var(--gray) 1px;
+        border-radius: 2px;
+        box-shadow: 2px 2px 4px var(--gray);
+        height: 15vh;
         margin: 2vw;
+        justify-content: center;
+        align-items: center;
         display: flex;
+        cursor: pointer;
+        transition: 200ms;
+        background: linear-gradient(45deg, white, white, white, #9dff98);
+        &:hover {
+          background: linear-gradient(45deg, white, #9dff98);
+          transform: scale(1.05);
+        }
         img {
-          border: solid var(--gray) 1px;
-          height: 25vw;
-          width: 25vw;
+          height: 10vh;
+          width: 10vh;
           object-fit: contain;
+          box-sizing: content-box !important;
+          padding-left: 10px;
         }
         .description {
           display: flex;
-          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           width: 75vw;
           height: 25vw;
           margin-left: 2vw;
-
-          p:nth-child(1) {
-            font-weight: 700;
-            font-size: 0.7em;
-          }
-          p:nth-child(2) {
-            color: var(--gray);
-            font-weight: 700;
-            font-size: 0.7em;
-          }
-          p:nth-child(3) {
-            font-size: 0.8em;
-          }
-          p:nth-child(4) {
-            height: 2em;
-            font-size: 0.7em;
-            display: flex;
-            align-items: center;
-            span {
-              height: 100%;
-              display: flex;
-              align-items: center;
-              img {
-                height: 30px;
-                width: 30px;
-                border: none;
-                object-fit: contain;
-                padding-left: 1em;
-              }
-            }
-            .tot {
-              font-weight: 600;
-              background: #ccc;
-              width: 5em;
-              border-radius: 4px;
-              display: flex;
-              justify-content: flex-end;
-              padding-right: 0.2em;
-              border: solid 2px var(--gray);
-            }
-          }
         }
       }
-    }
-  }
-  footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      border-bottom: solid var(--gray) 1px;
-      .total {
-        display: flex;
-        width: 90%;
-        justify-content: space-between;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1em;
-        margin: 3vh 0 3vh 0;
-      }
-      .discount {
-        color: var(--strongGreen);
-        background: var(--lightGreen);
-        border-radius: 50px;
-        padding: 0.3em;
-        font-size: 0.8em;
-        text-align: center;
-        margin: 3vh 0 3vh 0;
-        width: 90%;
-      }
-    }
-    button {
-      margin: 3vh 0 3vh 0;
-      background: ${({ selectedCandies }) =>
-        selectedCandies > 0 ? '#3b74f2' : 'gray'};
-      cursor: ${({ selectedCandies }) =>
-        selectedCandies > 0 ? 'pointer' : ''};
-      color: white;
-      width: 90%;
-      height: 8vh;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.2em;
-      font-weight: bold;
     }
   }
 `;

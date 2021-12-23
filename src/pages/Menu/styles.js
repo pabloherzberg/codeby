@@ -42,6 +42,7 @@ export const Container = styled.div`
           width: 75vw;
           height: 25vw;
           margin-left: 2vw;
+
           p:nth-child(1) {
             font-weight: 700;
             font-size: 0.7em;
@@ -57,85 +58,42 @@ export const Container = styled.div`
             display: flex;
             align-items: center;
             justify-content: space-between;
-            div {
+            span {
+              height: 100%;
               display: flex;
-              background: transparent !important;
-              div {
-                font-size: 1.8em;
-                #minus {
-                  background: #ffcddd;
-                  border-radius: 4px;
-                  padding-right: 4px;
-                  img {
-                    height: 80%;
-                  }
-                }
-                #add {
-                  background: #add;
-                  border-radius: 4px;
-                  padding-right: 4px;
-                  img {
-                    height: 80%;
-                  }
-                }
+              align-items: center;
+              img {
+                height: 30px;
+                width: 30px;
+                border: none;
+                object-fit: contain;
+              }
+            }
+            .tot {
+              font-weight: 600;
+              display: flex;
+              justify-content: flex-end;
+              padding-right: 0.2em;
+            }
+            #minus {
+              background: #ffcddd;
+              border-radius: 4px;
+              padding-right: 4px;
+              img {
+                height: 80%;
+              }
+            }
+            #add {
+              background: #add;
+              border-radius: 4px;
+              padding-right: 4px;
+              img {
+                height: 80%;
               }
             }
           }
           p:nth-child(4) {
             color: var(--gray);
-            font-weight: 700;
-            font-size: 0.7em;
-          }
-        }
-
-        #minus {
-          display: flex;
-          align-items: center;
-
-          span {
-            font-size: 0.6em;
-            background: #ffcdaa;
-            display: flex;
-            border-radius: 4px;
-            height: 50%;
-            align-items: center;
-            justify-content: center;
-            padding-right: 4px;
-          }
-          img {
-            object-fit: contain;
-            height: 50%;
-            width: 40px;
-            border: none;
-          }
-        }
-        #add {
-          display: flex;
-          align-items: center;
-          padding-left: 10px;
-          span {
-            font-size: 0.6em;
-            background: #add;
-            display: flex;
-            border-radius: 4px;
-            height: 50%;
-            align-items: center;
-            justify-content: center;
-            padding-right: 4px;
-          }
-          img {
-            object-fit: contain;
-            height: 50%;
-            width: 40px;
-            border: none;
-          }
-        }
-      }
-      .insuficient {
-        background: var(--backgroundgradient);
-        .description {
-          p:nth-child(4) {
-            color: red !important;
             font-weight: 700;
             font-size: 0.7em;
           }
@@ -177,7 +135,8 @@ export const Container = styled.div`
     }
     button {
       margin: 3vh 0 3vh 0;
-      background: #3b74f2;
+      background: ${({ selectedCandies }) =>
+        selectedCandies > 0 ? '#3b74f2' : 'gray'};
       cursor: ${({ selectedCandies }) =>
         selectedCandies > 0 ? 'pointer' : ''};
       color: white;
