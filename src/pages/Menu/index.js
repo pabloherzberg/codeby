@@ -17,9 +17,8 @@ import Modal from '../../Components/Modal';
 
 function Menu() {
   // eslint-disable-next-line no-unused-vars
-  const { selectedCandies, setSelectedCandies, candies, minCount } = useContext(
-    CartContext,
-  );
+  // eslint-disable-next-line prettier/prettier
+  const { selectedCandies, setSelectedCandies, candies, minCount } = useContext(CartContext);
   const [total, setTotal] = useState(0);
   const [modal, setModal] = useState(false);
 
