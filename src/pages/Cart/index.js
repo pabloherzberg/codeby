@@ -20,9 +20,8 @@ import Modal from '../../Components/Modal';
 
 function Cart() {
   // eslint-disable-next-line no-unused-vars
-  const { selectedCandies, setSelectedCandies, minCount } = useContext(
-    CartContext,
-  );
+  // eslint-disable-next-line prettier/prettier
+  const { selectedCandies, setSelectedCandies, minCount } = useContext(CartContext);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [modal, setModal] = useState(false);
@@ -148,12 +147,16 @@ function Cart() {
                       </div>
                     </div>
                   </p>
-                  <p>
-                    Quantidade mínima:
-                    {candy.minCount > 1
-                      ? ` ${candy.minCount} unidades`
-                      : ` ${candy.minCount} unidade`}
-                  </p>
+                  {candy.minCount > 0 ? (
+                    <p>
+                      Quantidade mínima:
+                      {candy.minCount > 1
+                        ? ` ${candy.minCount} unidades`
+                        : ` ${candy.minCount} unidade`}
+                    </p>
+                  ) : (
+                    <p>Quantidade mínima: 0</p>
+                  )}
                 </div>
               </li>
             ))}

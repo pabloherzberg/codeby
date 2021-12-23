@@ -20,8 +20,8 @@ export const formatPrice = (price) => {
 };
 
 export const contactD = (items) => {
-  const auxArray = Object.values(items).map((candy) =>
-    Number.parseFloat(candy.price),
+  const auxArray = Object.values(items).map(
+    (candy) => Number.parseFloat(candy.price) * candy.count,
   );
 
   const t = auxArray.reduce((tot, current) => tot + current);
